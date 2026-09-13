@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
-<title>롯데하이마트 삼천포점 코웨이 상담 9월 v1</title>
+<title>롯데하이마트 삼천포점 코웨이 상담 9월 v3</title>
 <style>
 :root{
   --bg:#f3f6fb; --card:#fff; --ink:#101828; --muted:#667085; --line:#dfe5ef;
@@ -81,9 +81,31 @@ select,input{width:100%;min-width:0;border:1px solid #cfd8e6;border-radius:10px;
 .pline{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px dotted #c8cfda;font-size:13px}.pline:last-child{border-bottom:0}.pline b{text-align:right}
 .print-periods{border:1px solid #111827;margin-top:10px;padding:10px}.print-footer{margin-top:12px;border-top:1px solid #111827;padding-top:8px;font-size:11px;font-weight:800}
 .print-blue{color:#1457c6;font-weight:950}
+
+.term-compare-head{display:flex;justify-content:space-between;gap:10px;align-items:end;margin-top:14px;margin-bottom:9px}
+.term-compare-title{font-size:15px;font-weight:950;color:#23324a}
+.term-compare-note{font-size:12px;color:var(--muted);text-align:right}
+.term-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.term-card{position:relative;border:1.5px solid var(--line);border-radius:16px;background:#fff;padding:13px;cursor:pointer;transition:.15s;min-width:0}
+.term-card:hover{border-color:#9ab8ff;transform:translateY(-1px)}
+.term-card.selected{border:2px solid var(--blue);background:#f7faff;box-shadow:0 0 0 3px rgba(33,102,243,.07)}
+.term-card .term-name{font-size:18px;font-weight:950}
+.term-card .term-owner{font-size:12px;color:var(--muted);font-weight:800;margin-top:2px}
+.term-card .term-price{font-size:23px;color:var(--blue);font-weight:950;margin:10px 0 8px;letter-spacing:-.5px}
+.term-card .minirow{display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-top:1px dashed #dbe3ef;font-size:12px}
+.term-card .minirow span{color:#667085}.term-card .minirow b{text-align:right;color:#344054}
+.term-card .term-badge{position:absolute;right:10px;top:10px;padding:4px 7px;border-radius:999px;background:var(--blue-50);color:var(--blue);font-size:11px;font-weight:950}
+.term-table-wrap{overflow:auto;margin-top:10px;border:1px solid var(--line);border-radius:14px}
+.term-table{width:100%;border-collapse:collapse;min-width:680px;font-size:13px}
+.term-table th,.term-table td{padding:10px 9px;border-bottom:1px solid var(--line);text-align:center}
+.term-table th{background:#f8fafc;color:#475467;font-size:12px}
+.term-table tr:last-child td{border-bottom:0}
+.term-table tr.active-row{background:#f1f6ff}
+.term-table td:first-child,.term-table th:first-child{text-align:left;font-weight:900}
+
 @media(max-width:900px){
  .wrap{padding:10px}.header{display:block;padding:15px;border-radius:16px}h1{font-size:24px}.top-actions{margin-top:12px}
- .product-grid{grid-template-columns:1fr}.product{min-height:0}.product-image{height:120px}
+ .product-grid{grid-template-columns:1fr}.product{min-height:0}.product-image{height:120px}.term-cards{grid-template-columns:1fr 1fr}
  .form-grid{grid-template-columns:1fr 1fr}.promo-grid{grid-template-columns:1fr}.card-controls{grid-template-columns:1fr}.summary-kpis{grid-template-columns:1fr 1fr}
  .point-box{grid-template-columns:1fr}.trow{grid-template-columns:72px 1fr 92px}.trow .hide-mobile{display:none}
  .card-rec{grid-template-columns:36px 1fr}.benefit{grid-column:2;text-align:left}
@@ -91,7 +113,7 @@ select,input{width:100%;min-width:0;border:1px solid #cfd8e6;border-radius:10px;
  .issue{padding:12px}.issue-img{height:130px}.qr{width:155px;height:155px}.qr-empty{width:155px;height:155px}
 }
 @media(max-width:520px){
- .mode-btn{padding:14px 8px;font-size:16px}.form-grid{grid-template-columns:1fr}.summary-kpis{grid-template-columns:1fr}
+ .mode-btn{padding:14px 8px;font-size:16px}.form-grid{grid-template-columns:1fr}.summary-kpis{grid-template-columns:1fr}.term-cards{grid-template-columns:1fr}.term-compare-head{display:block}.term-compare-note{text-align:left;margin-top:4px}
  .trow{grid-template-columns:62px 1fr 82px;font-size:12px}.trow>div{padding:9px 7px}
 }
 @media print{
@@ -105,7 +127,7 @@ select,input{width:100%;min-width:0;border:1px solid #cfd8e6;border-radius:10px;
 <div class="wrap">
  <div class="header">
    <div>
-    <h1>롯데하이마트 삼천포점 코웨이 상담 <span class="ver">9월 v1</span></h1>
+    <h1>롯데하이마트 삼천포점 코웨이 상담 <span class="ver">9월 v3</span></h1>
     <div class="subtitle">정수기 상담 / 비데 상담 전용 화면 분리 · 제품 선택 → 관리방식 → 약정/소유권 → 할인유형 → 제휴카드 → 요약</div>
     <div class="tel">전화번호 : 055-835-5533</div>
    </div>
@@ -140,12 +162,27 @@ select,input{width:100%;min-width:0;border:1px solid #cfd8e6;border-radius:10px;
  </section>
 
  <section class="panel">
-  <h2>③ 약정/소유권 및 렌탈료</h2>
+  <h2>③ 약정/소유권 및 렌탈료 비교</h2>
+  <div class="hint">현재 선택한 제품·관리방식의 약정별 월 렌탈료를 한눈에 비교하고, 원하는 약정을 바로 선택할 수 있습니다.</div>
+
   <div class="form-grid">
-   <div class="field"><label>약정기간</label><select id="term" onchange="recalc()"></select></div>
+   <div class="field"><label>현재 선택 약정</label><select id="term" onchange="onTermChange()"></select></div>
    <div class="field"><label>소유권</label><input id="ownership" readonly></div>
    <div class="field"><label>약정할인가</label><input id="contractPrice" readonly></div>
    <div class="field"><label>월 기본 렌탈료</label><input id="basePrice" readonly></div>
+  </div>
+
+  <div class="term-compare-head">
+   <div class="term-compare-title">약정별 월 렌탈료 한눈에 보기</div>
+   <div class="term-compare-note">카드를 누르면 해당 약정으로 바로 변경됩니다.</div>
+  </div>
+  <div id="termCards" class="term-cards"></div>
+
+  <div class="term-table-wrap">
+   <table class="term-table">
+    <thead><tr><th>약정</th><th>소유권</th><th>약정할인가</th><th>타사/10% 기준가</th><th>신규 반값 기간</th><th>관리방식</th></tr></thead>
+    <tbody id="termCompareBody"></tbody>
+   </table>
   </div>
  </section>
 
@@ -211,46 +248,46 @@ const $=id=>document.getElementById(id);
 const won=n=>Math.max(0,Math.round(Number(n||0))).toLocaleString('ko-KR')+'원';
 
 const WATER={
- icon2:{name:'아이콘 2_V2',img:'coway_assets/water_icon2_v2.jpg',models:{hot:'(R)CHP-7211N_V2',cold:'(R)CP-7211N_V2'},desc:'기본에 충실한 직수 정수기',
+ icon2:{name:'아이콘 2_V2',img:'coway_assets/coway_icon2_v2.jpg',models:{hot:'(R)CHP-7211N_V2',cold:'(R)CP-7211N_V2'},desc:'기본에 충실한 직수 정수기',
    manage:{self:{label:'자가관리',cycles:{'6M':'6개월 택배'},prices:{3:34900,5:31900,6:29900,7:27900},service:'필터 6개월 전체교체 · 택배배송'},visit:{label:'방문관리',cycles:{'4M':'4개월 코디'},prices:{3:37900,5:34900,6:32900,7:30900},service:'필터 4개월 전체교체 · 코디 방문 · 살균서비스'}},
    half:{3:6,5:6,6:18,7:18},compExtra:t=>10000,core:['파우셋 수시 세척 및 정기교체','4단계 온수조절','5단계 용량추출','IoCare + APP'],sales:['일상 사용이 단순한 가정에 설명하기 쉬운 균형형','자가관리와 방문관리 선택 폭이 넓음']},
- icon3:{name:'아이콘 3',img:'coway_assets/water_icon3.jpg',models:{hot:'(R)CHP-7220N',cold:'(R)CP-7220N'},desc:'좁은 주방에 강한 초슬림 정수기',
+ icon3:{name:'아이콘 3',img:'coway_assets/coway_icon3.jpg',models:{hot:'(R)CHP-7220N',cold:'(R)CP-7220N'},desc:'좁은 주방에 강한 초슬림 정수기',
    manage:{self:{label:'자가관리',cycles:{'6M':'6개월 택배'},prices:{3:35900,5:32900,6:30900,7:28900},service:'필터 6개월 교체 · 택배배송'},visit:{label:'방문관리',cycles:{'4M':'4개월 코디'},prices:{3:38900,5:35900,6:33900,7:31900},service:'필터 4개월 교체 · 코디 방문'}},
    half:{3:6,5:6,6:18,7:18},compExtra:t=>10000,core:['무빙 파우셋','99.9% UV 살균','가로 16cm 초소형','올인원 나노트랩필터'],sales:['싱크대 옆 여유가 적은 고객에게 먼저 보여주기 좋은 모델','위생과 공간절약을 동시에 설명하기 좋음']},
- pro:{name:'아이콘 PRO',img:'coway_assets/water_icon_pro.jpg',models:{hot:'(R)CHP-7212N',cold:'(R)CP-7212N'},desc:'정밀 맞춤 기능을 갖춘 프리미엄 직수 정수기',
+ pro:{name:'아이콘 PRO',img:'coway_assets/coway_icon_pro.jpg',models:{hot:'(R)CHP-7212N',cold:'(R)CP-7212N'},desc:'정밀 맞춤 기능을 갖춘 프리미엄 직수 정수기',
    manage:{self:{label:'자가관리',cycles:{'6M':'6개월 택배'},prices:{3:36900,5:33900,6:31900,7:29900},service:'필터 6개월 교체 · 택배배송'},visit:{label:'방문관리',cycles:{'4M':'4개월 코디'},prices:{3:39900,5:36900,6:34900,7:32900},service:'필터 4개월 교체 · 코디 방문'}},
    half:{3:6,5:6,6:12,7:12},compExtra:t=>10000,core:['온수 5℃ 단위 설정','추출량 10ml 단위 설정','MY워터 10개 저장','12가지 레시피 모드'],sales:['세밀한 온도·용량 설정을 원하는 고객에게 적합','프리미엄 기능 설명이 설득 포인트']},
- iceMini:{name:'아이콘 얼음 미니',img:'coway_assets/water_ice_mini.jpg',models:{hot:'(R)CHPI-7430N',cold:'(R)CHPI-7430N'},desc:'공간 부담을 줄인 얼음정수기',
+ iceMini:{name:'아이콘 얼음 미니',img:'coway_assets/coway_ice_mini.jpg',models:{hot:'(R)CHPI-7430N',cold:'(R)CHPI-7430N'},desc:'공간 부담을 줄인 얼음정수기',
    manage:{visit4:{label:'방문관리',cycles:{'4M':'4개월 코디'},prices:{3:49900,5:46900,6:44900,7:42900},service:'1회용 키트 · 주기별 필터교체 · 얼음특화 세척'},visit2:{label:'방문관리',cycles:{'2M':'2개월 코디'},prices:{3:52900,5:49900,6:47900,7:45900},service:'2개월 코디 방문 · 얼음특화 세척'}},
    half:{3:3,5:6,6:18,7:18},compExtra:t=>t>=6?20000:10000,core:['듀얼 쾌속 제빙','온수 45/70/85/100℃','얼음트레이 자동 살균','IoCare+ 앱'],sales:['얼음은 꼭 필요하지만 본체 크기가 부담인 고객','6·7년 타사보상 시 12개월간 2만원 추가할인 대상']},
- iceStd:{name:'아이콘 얼음 스탠다드',img:'coway_assets/water_ice_standard.jpg',models:{hot:'(R)CHPI-7410N',cold:'(R)CPI-7410N'},desc:'얼음 사용량이 많은 가정용 스탠다드',
+ iceStd:{name:'아이콘 얼음 스탠다드',img:'coway_assets/coway_ice_standard.jpg',models:{hot:'(R)CHPI-7410N',cold:'(R)CPI-7410N'},desc:'얼음 사용량이 많은 가정용 스탠다드',
    manage:{visit4:{label:'방문관리',cycles:{'4M':'4개월 코디'},prices:{3:53900,5:49900,6:47900,7:45900},service:'4개월 코디 · 살균서비스'},visit2:{label:'방문관리',cycles:{'2M':'2개월 코디'},prices:{3:56900,5:52900,6:50900,7:48900},service:'2개월 코디 · 더블필터셋 7인치 · 얼음트레이 관리'}},
    half:{3:3,5:6,6:18,7:18},compExtra:t=>t>=6?20000:10000,core:['듀얼 쾌속 제빙','1일 최대 약 600개 얼음','7종 UV 살균','얼음·물 동시 추출'],sales:['얼음 사용량이 많은 가족에게 설명하기 좋은 모델','6·7년 타사보상 2만원 추가할인 대상']},
- iceOri:{name:'아이콘 얼음 오리지널',img:'coway_assets/water_ice_original.jpg',models:{hot:'(R)CHPI-7400N',cold:'(R)CPI-7400N'},desc:'검증된 구성의 얼음정수기',
+ iceOri:{name:'아이콘 얼음 오리지널',img:'coway_assets/coway_ice_original.jpg',models:{hot:'(R)CHPI-7400N',cold:'(R)CPI-7400N'},desc:'검증된 구성의 얼음정수기',
    manage:{visit4:{label:'방문관리',cycles:{'4M':'4개월 코디'},prices:{3:51900,5:48400,6:46900,7:45400},service:'4개월 필터교체 · 살균서비스'},visit2:{label:'방문관리',cycles:{'2M':'2개월 코디'},prices:{3:54900,5:51400,6:49900,7:48400},service:'2개월 관리 · 살균서비스'}},
    half:{3:3,5:6,6:18,7:18},compExtra:t=>t>=6?20000:10000,core:['듀얼 쾌속 제빙','하루 약 600개 얼음','나노트랩 필터','4종 UV 살균'],sales:['익숙한 얼음정수기 구성을 원하는 고객','6·7년 타사보상 2만원 추가할인 대상']}
 };
 
 const BIDET={
- bas37:{name:'더블케어 비데2',code:'BAS37-C',img:'coway_assets/bidet_bas37c.jpg',desc:'위생·살균 기능 중심',
+ bas37:{name:'더블케어 비데2',code:'BAS37-C',img:'coway_assets/bidet_bas37_c.jpg',desc:'위생·살균 기능 중심',
    manage:{v2:{label:'방문관리',cycles:{'2M':'1회/2개월'},prices:{3:30900,5:29400,6:28400},service:'2개월 방문관리'},v4:{label:'방문관리',cycles:{'4M':'1회/4개월'},prices:{3:28900,5:27400,6:26400},service:'4개월 방문관리'},self:{label:'자가관리',cycles:{SELF:'자가관리'},prices:{3:26900,5:25400,6:24400},service:'자가관리'}},
    comp:true,core:['항균처리 소재','전기분해수 살균','i-wave 세정','4단계 수류'],sales:['살균과 관리 편의성을 중시하는 고객']},
- bas38:{name:'더블케어 플러스 비데2',code:'BAS38-C',img:'coway_assets/bidet_bas38c.jpg',desc:'듀얼케어와 자동개폐',
+ bas38:{name:'더블케어 플러스 비데2',code:'BAS38-C',img:'coway_assets/bidet_bas38_c.jpg',desc:'듀얼케어와 자동개폐',
    manage:{v2:{label:'방문관리',cycles:{'2M':'1회/2개월'},prices:{3:31900,5:30400,6:29400},service:'2개월 방문관리'},v4:{label:'방문관리',cycles:{'4M':'1회/4개월'},prices:{3:29900,5:28400,6:27400},service:'4개월 방문관리'},self:{label:'자가관리',cycles:{SELF:'자가관리'},prices:{3:27900,5:26400,6:25400},service:'자가관리'}},
    comp:true,core:['자동개폐 모드','99.9% 살균모듈','버블 카트리지','풀스테인리스 트윈 노즐'],sales:['자동개폐와 편의 기능을 선호하는 고객']},
- bas40:{name:'스타일 비데',code:'BAS40-B',img:'coway_assets/bidet_bas40b.jpg',desc:'기본 위생 기능과 슬림 디자인',
+ bas40:{name:'스타일 비데',code:'BAS40-B',img:'coway_assets/bidet_bas40_a.jpg',desc:'기본 위생 기능과 슬림 디자인',
    manage:{v4:{label:'방문관리',cycles:{'4M':'1회/4개월'},prices:{3:22900,5:21400,6:20400},service:'4개월 방문관리'},self:{label:'자가관리',cycles:{SELF:'자가관리'},prices:{3:20900,5:19400,6:18400},service:'자가관리'}},
    comp:true,core:['전기분해수 살균','스테인리스 트윈 노즐','분리형 노즐팁·덕트','IPX6 방수'],sales:['가격 부담을 줄이면서 위생 기능을 원하는 고객']},
- bas41:{name:'스타일 비데 플러스',code:'BAS41-B',img:'coway_assets/bidet_bas41b.jpg',desc:'살균과 다양한 세정모드',
+ bas41:{name:'스타일 비데 플러스',code:'BAS41-B',img:'coway_assets/bidet_bas41_a.jpg',desc:'살균과 다양한 세정모드',
    manage:{v2:{label:'방문관리',cycles:{'2M':'1회/2개월'},prices:{3:26400,5:24900,6:23900},service:'2개월 방문관리'},v4:{label:'방문관리',cycles:{'4M':'1회/4개월'},prices:{3:24400,5:22900,6:21900},service:'4개월 방문관리'},self:{label:'자가관리',cycles:{SELF:'자가관리'},prices:{3:22400,5:20900,6:19900},service:'자가관리'}},
    comp:true,core:['3단계 스스로 살균','스테인리스 트윈 노즐','건조커버/노즐팁 교체','i-wave 시스템'],sales:['살균·세정모드와 관리 밸런스를 원하는 고객']},
- bas49:{name:'슬리믹 비데',code:'BAS49-A',img:'coway_assets/bidet_bas49a.jpg',desc:'83mm 초슬림 디자인',
+ bas49:{name:'슬리믹 비데',code:'BAS49-A',img:'coway_assets/bidet_bas49_a.jpg',desc:'83mm 초슬림 디자인',
    manage:{v2:{label:'방문관리',cycles:{'2M':'1회/2개월'},prices:{3:28900,5:26900,6:25900},service:'2개월 방문관리'},v4:{label:'방문관리',cycles:{'4M':'1회/4개월'},prices:{3:26900,5:24900,6:23900},service:'4개월 방문관리'},self:{label:'자가관리',cycles:{SELF:'자가관리'},prices:{3:24900,5:22900,6:21900},service:'자가관리'}},
    comp:true,core:['83mm 초슬림','플랫 디자인','3단계 강력 살균','i-wave 세정'],sales:['욕실 공간과 디자인을 중시하는 고객']},
- ba52:{name:'프라임 비데',code:'BA52-A',img:'coway_assets/bidet_ba52a.jpg',desc:'가성비 중심 기본형',
+ ba52:{name:'프라임 비데',code:'BA52-A',img:'coway_assets/bidet_ba52_a.jpg',desc:'가성비 중심 기본형',
    manage:{v2:{label:'방문관리',cycles:{'2M':'1회/2개월'},prices:{3:23400,5:21900,6:20900},service:'2개월 방문관리'},v4:{label:'방문관리',cycles:{'4M':'1회/4개월'},prices:{3:21400,5:19900,6:18900},service:'4개월 방문관리'},self:{label:'자가관리',cycles:{SELF:'자가관리'},prices:{3:19400,5:17900,6:16900},service:'자가관리'}},
    comp:true,core:['사용자 메모리 2인','스테인리스 트윈 노즐','Air+ 5단계 수압','IPX5 방수'],sales:['부담 낮은 월 렌탈료를 우선하는 고객']},
- bas51:{name:'더매너 비데 플러스',code:'BAS51-A',img:'coway_assets/bidet_bas51a.jpg',desc:'비산흡입·향기추가·탈취',
+ bas51:{name:'더매너 비데 플러스',code:'BAS51-A',img:'coway_assets/bidet_bas51_a.jpg',desc:'비산흡입·향기추가·탈취',
    manage:{self:{label:'자가관리',cycles:{SELF:'12개월 택배'},prices:{3:32900,5:30900,6:29900,7:28900},service:'12개월 택배 자가관리'},v4:{label:'방문관리',cycles:{'4M':'4개월 코디'},prices:{3:34900,5:32900,6:31900,7:30900},service:'4개월 코디 방문'}},
    half:{3:3,5:6,6:9,7:12},comp:false,core:['비산흡입','향기추가 & 탈취','3단계 살균','i-wave 세정'],sales:['냄새·비산 관리와 프리미엄 디자인을 중시하는 고객']}
 };
@@ -260,7 +297,7 @@ const CARDS=[
  {id:'kb',name:'KB국민 코웨이Ⅱ 카드',phone:'1644-4388',img:'coway_assets/card_kb.png',tiers:[[400000,26000],[800000,30000]],desc:'36개월간 최대 3만원 청구할인',url:''},
  {id:'nh',name:'코웨이 NH농협카드',phone:'1644-2866',img:'coway_assets/card_nh.png',tiers:[[300000,20000],[1000000,25000],[2000000,40000]],desc:'60개월간 최대 4만원 혜택',url:'https://go.nhcard.com/GscIjMo'},
  {id:'lotte',name:'코웨이 롯데카드',phone:'1577-5208',img:'coway_assets/card_lotte.png',tiers:[[400000,16000],[800000,19000],[1600000,24000]],desc:'9/16부터 60개월간 최대 2.4만원',url:'',start:'2026-09-16'},
- {id:'hyundaiM',name:'코웨이 현대카드 M Edition3',phone:'02-2655-5003',img:'coway_assets/card_hyundai_m.png',tiers:[[500000,25000],[1000000,30000]],desc:'36개월간 최대 3만원',url:''},
+ {id:'hyundaiM',name:'코웨이 현대카드 M Edition3',phone:'02-2655-5003',img:'coway_assets/card_hyundai_m3.png',tiers:[[500000,25000],[1000000,30000]],desc:'36개월간 최대 3만원',url:''},
  {id:'woori',name:'코웨이 ICON 우리카드',phone:'1800-0859',img:'coway_assets/card_woori.png',tiers:[[300000,24000],[800000,24000],[1500000,30000]],desc:'60개월간 최대 3만원',url:''},
  {id:'samsung',name:'코웨이 삼성카드',phone:'1588-7540',img:'coway_assets/card_samsung.png',tiers:[[300000,22000],[700000,24000],[1200000,26000]],desc:'60개월간 최대 2.6만원',url:''},
  {id:'hana',name:'마이 코웨이 하나카드',phone:'1588-1771',img:'coway_assets/card_hana.png',tiers:[[300000,13000],[800000,18000],[1500000,25000]],desc:'기본 제휴 혜택',url:''},
@@ -270,7 +307,7 @@ const CARDS=[
 let state={mode:'water',product:'icon3',promo:'half',card:'none'};
 
 function assetImg(src,name){
- return `<img src="${src}" alt="${name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="fallback" style="display:none">${name}<br>이미지 파일 확인</div>`;
+ return `<img src="${src}" alt="${name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="fallback" style="display:none">${name}<br><small>coway_assets 파일명 확인</small></div>`;
 }
 function switchMode(mode){
  state.mode=mode;
@@ -299,12 +336,58 @@ function setupOptions(){
  const terms=new Set(); Object.values(p.manage).forEach(m=>Object.keys(m.prices).forEach(t=>terms.add(+t)));
  $('term').innerHTML=[...terms].sort((a,b)=>a-b).map(t=>`<option value="${t}">${t}년</option>`).join('');
  if([...terms].includes(5))$('term').value='5';
+ renderTermComparison();
 }
 function onManage(doCalc=true){
  const p=dataset()[state.product], m=p.manage[$('manage').value]||Object.values(p.manage)[0];
  $('cycle').innerHTML=Object.entries(m.cycles).map(([k,v])=>`<option value="${k}">${v}</option>`).join('');
+ renderTermComparison();
  if(doCalc)recalc();
 }
+
+function onTermChange(){
+ renderTermComparison();
+ recalc();
+}
+function selectTerm(t){
+ const el=$('term');
+ if(![...el.options].some(o=>+o.value===+t)) return;
+ el.value=String(t);
+ renderTermComparison();
+ recalc();
+}
+function renderTermComparison(){
+ const p=dataset()[state.product];
+ const m=p.manage[$('manage').value]||Object.values(p.manage)[0];
+ const terms=Object.keys(m.prices).map(Number).sort((a,b)=>a-b);
+ const selected=+$('term').value;
+ const manageLabel=m.label;
+ $('termCards').innerHTML=terms.map(t=>{
+   const price=m.prices[t];
+   let half='-';
+   if(p.half && p.half[t]) half=p.half[t]+'개월';
+   const ten=Math.round(price*.9);
+   return `<div class="term-card ${selected===t?'selected':''}" onclick="selectTerm(${t})">
+     ${selected===t?'<div class="term-badge">선택중</div>':''}
+     <div class="term-name">${t}년 약정</div>
+     <div class="term-owner">소유권 ${ownership(t)}</div>
+     <div class="term-price">${won(price)}<span style="font-size:12px;color:#667085"> /월</span></div>
+     <div class="minirow"><span>10% 기준가</span><b>${won(ten)}</b></div>
+     <div class="minirow"><span>신규 반값</span><b>${half}</b></div>
+     <div class="minirow"><span>관리</span><b>${manageLabel}</b></div>
+   </div>`;
+ }).join('');
+
+ $('termCompareBody').innerHTML=terms.map(t=>{
+   const price=m.prices[t];
+   const ten=Math.round(price*.9);
+   const half=(p.half&&p.half[t])?p.half[t]+'개월':'-';
+   return `<tr class="${selected===t?'active-row':''}" onclick="selectTerm(${t})" style="cursor:pointer">
+    <td>${t}년</td><td>${ownership(t)}</td><td><b>${won(price)}</b></td><td>${won(ten)}</td><td>${half}</td><td>${manageLabel}</td>
+   </tr>`;
+ }).join('');
+}
+
 function ownership(term){term=+term;return term===3||term===5?'5년':term+'년'}
 function renderPromos(){
  const p=dataset()[state.product], term=+$('term').value||5;
@@ -372,6 +455,7 @@ function calc(){
 }
 function recalc(){
  const p=dataset()[state.product],term=+$('term').value||5;
+ renderTermComparison();
  renderPromos();
  $('ownership').value=ownership(term);
  $('basePrice').value=won(currentBase()); $('contractPrice').value=won(currentBase());
